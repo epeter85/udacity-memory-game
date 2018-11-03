@@ -70,14 +70,14 @@ h1 {
     transition: .5s ease-in-out;
 }
 
+i {
+  transform: rotateY(180deg);
+}
+
 .deck .card.open {
     transform: rotateY(180deg);
     background: #02b3e4;
     cursor: default;
-
-    i {
-      display: none;
-    }
 }
 
 .deck .card.show {
@@ -88,11 +88,17 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    transform: rotateY(180deg);
 }
 
 /*
  * Styles for the Score Panel
  */
+
+ #time {
+    display: inline-block;
+    margin-left: 20px;
+ }
 
 .score-panel {
     text-align: left;
@@ -105,6 +111,10 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+}
+
+.score-panel li {
+  margin-left: 3px;
 }
 
 .score-panel .stars li {
