@@ -5,6 +5,7 @@
  var shuffledDeck = [];
  var firstSelectedCard = null;
  var secondSelectedCard = null;
+ var moveCounter = 0;
 
 /*
  * Display the cards on the page
@@ -86,15 +87,21 @@ function shuffle(array) {
     console.log("firstSelectedCard = " + firstSelectedCard.getAttribute('data'));
 
     //call card animation
-    firstSelectedCard.className += " open show";
+    flipCard(firstSelectedCard);
 
   }else{
+
+    //disable all buttons here
 
     secondSelectedCard = evt.target;
     secondSelectedCard.removeEventListener('click', cardSelect);
     console.log("secondSelectedCard = " + secondSelectedCard.getAttribute('data'));
 
-    secondSelectedCard.className += " open show";
+    //call card animation
+    flipCard(secondSelectedCard);
+    moveCounter++
+    let counter = document.querySelector('.moves');
+    counter.textContent = moveCounter;
 
     //check to see if match here
     if (firstSelectedCard.getAttribute('data') == secondSelectedCard.getAttribute('data')) {
@@ -103,22 +110,42 @@ function shuffle(array) {
       firstSelectedCard = null;
       secondSelectedCard = null;
 
+      //enable all buttons here
+
+
     }else{
 
       console.log('no match');
-      //delay .5
-      firstSelectedCard.classList.remove("open", "show");
-      secondSelectedCard.classList.remove("open", "show");
-      //flip both cards over
-      //delay event listener addition
-      firstSelectedCard.addEventListener('click', cardSelect);
-      secondSelectedCard.addEventListener('click', cardSelect);
+      setTimeout(flipCardsBack.bind(null, firstSelectedCard), 1000);
+      setTimeout(flipCardsBack.bind(null, secondSelectedCard), 1000);
+      //firstSelectedCard.addEventListener('click', cardSelect);
+      //secondSelectedCard.addEventListener('click', cardSelect);
       firstSelectedCard = null;
       secondSelectedCard = null;
 
+      //enable all buttons here
+
     }
 
+
   }
+}
+
+function flipCard(obj){
+
+    obj.className += " open show";
+
+}
+
+function flipCardsBack(obj){
+    obj.classList.remove("open", "show");
+    obj.addEventListener('click', cardSelect);
+
+    //obj = null
+
+    console.log('moveCounter = ' + moveCounter)
+    //secondSelectedCard.classList.remove("open", "show");
+
 }
 
 // toggleClick(obj) {
