@@ -7,6 +7,7 @@
  var secondSelectedCard = null;
  var moveCounter = 0;
  var cardMatches = 0;
+ var starsCount = 3;
  var mainInt;
 
 /*
@@ -196,11 +197,14 @@ function matchAni(obj) {
 }
 
 function updateStars() {
+
+  if (starsCount == 0) return;
   //nine moves until the stars run out
   if ( moveCounter % 3 === 0 ) {
     let stars = document.querySelector(".stars");
     let star = document.querySelector(".stars li");
       stars.removeChild(star);
+      starsCount--
   }
 }
 
@@ -220,7 +224,6 @@ restartBtn.addEventListener('click', buildDeck);
 
 // MODAL
 var modal = document.getElementById('myModal');
-var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 var playAgain = document.getElementById("playAgain");
 

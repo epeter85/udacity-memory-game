@@ -70,8 +70,9 @@ h1 {
     transition: .5s ease-in-out;
 }
 
-i {
+.deck .card i {
   transform: rotateY(180deg);
+  /* opacity:0; */
 }
 
 .deck .card.open {
@@ -88,10 +89,10 @@ i {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
-    /*transform: rotateY(180deg);*/
     animation-duration: .33s;
     animation-name: bounce;
 }
+
 
 /*
  * Styles for the Score Panel
@@ -141,7 +142,9 @@ i {
     }
 }
 
-/* The Modal (background) */
+/*
+ * Styles for the Modal
+ */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
