@@ -6,7 +6,8 @@
  var firstSelectedCard = null;
  var secondSelectedCard = null;
  var moveCounter = 0;
- var timer;
+ var cardMatches = 0;
+ var mainInt;
 
 /*
  * Display the cards on the page
@@ -29,6 +30,7 @@
 
   //start Timer
   //clearInterval(timer);
+  stopTimer();
   var threeMinutes = 60 * 3,
   display = document.querySelector('#time');
   startTimer(threeMinutes, display);
@@ -132,6 +134,14 @@ function shuffle(array) {
       firstSelectedCard = null;
       secondSelectedCard = null;
 
+      cardMatches++
+
+      if (cardMatches == 8) {
+        console.log('trigger win');
+        stopTimer();
+        setTimeout(winner, 1500);
+      }
+
     }else{
 
       console.log('no match');
@@ -149,7 +159,7 @@ function shuffle(array) {
 
 function startTimer(duration, display) {
      let timer = duration, minutes, seconds;
-    setInterval(function () {
+    mainInt = setInterval(function () {
         minutes = parseInt(timer / 60, 10)
         seconds = parseInt(timer % 60, 10);
 
@@ -162,6 +172,11 @@ function startTimer(duration, display) {
             timer = duration;
         }
     }, 1000);
+}
+
+function stopTimer() {
+  console.log('stop timer');
+  clearInterval(mainInt);
 }
 
 function flipCard(obj){
@@ -202,5 +217,35 @@ function toggleClicks(condition) {
 
 const restartBtn = document.querySelector('.restart');
 restartBtn.addEventListener('click', buildDeck);
+
+// MODAL
+var modal = document.getElementById('myModal');
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+var playAgain = document.getElementById("playAgain");
+
+// When the user clicks on the button, open the modal
+function winner() {
+    modal.style.display = "block";
+    let finalMoveDisplay = document.getElementById('finalMoves');
+    finalMoveDisplay.textContent = moveCounter;
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+playAgain.onclick = function() {
+    modal.style.display = "none";
+    buildDeck();
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
 buildDeck();
