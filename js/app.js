@@ -8,7 +8,7 @@
  var moveCounter = 0;
  var cardMatches = 0;
  var starsCount = 3;
- var mainInt;
+ var timer;
 
 /*
  * Display the cards on the page
@@ -30,11 +30,8 @@
    stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
 
   //start Timer
-  //clearInterval(timer);
-  stopTimer();
-  var threeMinutes = 60 * 3,
-  display = document.querySelector('#time');
-  startTimer(threeMinutes, display);
+  clearInterval(timer);
+  startTimer();
 
   let cardData = [];
 
@@ -158,27 +155,21 @@ function shuffle(array) {
   }
 }
 
-function startTimer(duration, display) {
-     let timer = duration, minutes, seconds;
-    mainInt = setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
+var display = document.querySelector('#time');
+var totalSeconds = 0;
+var sec = 0;
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+function pad ( val ) { return val > 9 ? val : "0" + val; }
 
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            timer = duration;
-        }
-    }, 1000);
+function startTimer() {
+  sec = 0;
+  timer = setInterval ( function(){
+    let secondsLabel = pad(++sec%60);
+    let minutesLabel = pad(parseInt(sec/60,10));
+    display.textContent = minutesLabel + ":" + secondsLabel;
+  }, 1000 );
 }
 
-function stopTimer() {
-  console.log('stop timer');
-  clearInterval(mainInt);
-}
 
 function flipCard(obj){
 
