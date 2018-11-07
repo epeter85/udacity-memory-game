@@ -134,9 +134,8 @@ function shuffle(array) {
 
       cardMatches++
 
-      if (cardMatches == 1) {
+      if (cardMatches == cardSymbols.length) {
         console.log('trigger win');
-        //stopTimer();
         clearInterval(timer);
         setTimeout(winner, 1500);
       }
@@ -192,7 +191,7 @@ function updateStars() {
 
   if (starsCount == 0) return;
   //nine moves until the stars run out
-  if ( moveCounter % 3 === 0 ) {
+  if ( moveCounter % (cardSymbols.length) === 0 ) {
     let stars = document.querySelector(".stars");
     let star = document.querySelector(".stars li");
       stars.removeChild(star);
