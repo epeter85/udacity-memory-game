@@ -134,9 +134,10 @@ function shuffle(array) {
 
       cardMatches++
 
-      if (cardMatches == 8) {
+      if (cardMatches == 1) {
         console.log('trigger win');
-        stopTimer();
+        //stopTimer();
+        clearInterval(timer);
         setTimeout(winner, 1500);
       }
 
@@ -221,8 +222,17 @@ var playAgain = document.getElementById("playAgain");
 // When the user clicks on the button, open the modal
 function winner() {
     modal.style.display = "block";
+
     let finalMoveDisplay = document.getElementById('finalMoves');
     finalMoveDisplay.textContent = moveCounter;
+
+    let finalTimeDisplay = document.getElementById('finalTime');
+    let secondsLabel = pad(++sec%60);
+    let minutesLabel = pad(parseInt(sec/60,10));
+    finalTimeDisplay.textContent = minutesLabel + ":" + secondsLabel;
+
+    let finalStarDisplay = document.getElementById('finalStars');
+    finalStarDisplay.textContent = starsCount;
 }
 
 // When the user clicks on <span> (x), close the modal
